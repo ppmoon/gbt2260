@@ -1,10 +1,7 @@
 package gbt2260
 
 import (
-	"encoding/csv"
 	"fmt"
-	"io"
-	"os"
 )
 
 type BGT2260 struct{}
@@ -13,25 +10,9 @@ type BGT2260 struct{}
 var trie = New()
 
 func NewGBT2260() *BGT2260 {
-	//读取文件
-	//获取相对路径
-	pwd,_ := os.Getwd()
-	file, err := os.Open(pwd+"/GBT2260-201802.csv")
-	if err != nil {
-		fmt.Println("Error:", err)
-	}
-	defer file.Close()
-	reader := csv.NewReader(file)
-	for {
-		record, err := reader.Read()
-		if err == io.EOF {
-			break //文件读完了就结束
-		} else if err != nil {
-			fmt.Println("Error:", err)
-		}
-		code := record[0]
-		name := record[1]
-		createTrieTree(code, name, trie)
+	gbt2260Table := GetGbt2260Table()
+	for _, cell := range gbt2260Table {
+		createTrieTree(cell[0], cell[1], trie)
 	}
 	return &BGT2260{}
 }
