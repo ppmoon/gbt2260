@@ -15,10 +15,12 @@ vgo get github.com/ppmoon/gbt2260
 如果是直辖市比如北京 110000 返回就是[北京市]
 
 ````golang
-import gbt2260
-gbt2260 := gbt2260.NewGBT2260()
-lCode := gbt2260.SearchGBT2260("130104")
-fmt.Println(lCode)
+//引入包
+import "github.com/ppmoon/gbt2260"
+//打印查看
+region := gbt2260.NewGBT2260()
+localCode := region.SearchGBT2260("130104")
+fmt.Println(localCode)
 ````
 ````bash
 [河北省 石家庄市 桥西区]
