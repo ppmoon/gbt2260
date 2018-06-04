@@ -1,8 +1,6 @@
 package gbt2260
 
-import (
-	"testing"
-)
+import "testing"
 
 //func TestSearchTrieTree(t *testing.T) {
 //	local := SearchTrieTree("110000")
@@ -19,6 +17,7 @@ func TestBGT2260_SearchGBT2260(t *testing.T) {
 		}
 	}
 }
+
 //下面这个测试用来生成地域配置文件用的
 //func TestCreateGBT2260Table(t *testing.T) {
 //	CreateGBT2260Table()
