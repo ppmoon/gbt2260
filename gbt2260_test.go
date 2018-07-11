@@ -19,6 +19,6 @@ func TestBGT2260_SearchGBT2260(t *testing.T) {
 }
 
 //下面这个测试用来生成地域配置文件用的
-//func TestCreateGBT2260Table(t *testing.T) {
-//	CreateGBT2260Table()
-//}
+func TestCreateGBT2260Table(t *testing.T) {
+	CreateGBT2260Table()
+}
