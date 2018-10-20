@@ -1,1 +1,1 @@
-module gbt2260
+module github.com/ppmoon/gbt2260
