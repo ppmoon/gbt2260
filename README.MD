@@ -4,11 +4,11 @@
 ## 安装
 
 ````bash
-go get github.com/ppmoon/gbt2260
+go get -u github.com/ppmoon/gbt2260
 ````
-或者你使用vgo
+或者你使用go module(vgo)
 ````bash
-vgo get github.com/ppmoon/gbt2260
+go get -u github.com/ppmoon/gbt2260
 ````
 ## 如何使用？
 输入一个行政区域代码比如 130104 返回一个省市县的数组[河北省 石家庄市 桥西区]
