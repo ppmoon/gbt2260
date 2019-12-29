@@ -9,7 +9,7 @@ import (
 )
 
 func CreateGBT2260Table() {
-	file, err := os.Open("./data/GBT2260-201806.csv")
+	file, err := os.Open("./data/GBT2260-201911.csv")
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
