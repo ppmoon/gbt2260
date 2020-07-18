@@ -57,3 +57,47 @@ func (b *BGT2260) SearchGBT2260(code string) []string {
 	}
 	return newCode
 }
+
+// 获取所有省份
+func (b *BGT2260) GetAllProvince() map[string]string{
+	var provinceList = make(map[string]string)
+	node := trie.Root()
+	for k,v:=range node.Children(){
+		provinceList[k + "0000"] = v.value
+	}
+	return provinceList
+}
+
+// 获取省份下的城市
+func (b *BGT2260) GetCitysByProvince(code string) map[string]string{
+	var cityList = make(map[string]string)
+	var lCode = stringParse(code)
+	node := trie.Root()
+	for k,v:=range node.Children(){
+		if lCode[0] == k{
+			for kk,vv:=range v.Children(){
+				cityList[k+kk + "00"] = vv.value
+			}
+		}
+	}
+	return cityList
+}
+
+// 获取城市下的区
+func (b *BGT2260) GetAreaByCity(code string) map[string]string{
+	var areaList = make(map[string]string)
+	var lCode = stringParse(code)
+	node := trie.Root()
+	for k,v:=range node.Children(){
+		if lCode[0] == k{
+			for kk,_:=range v.Children(){
+				if kk == lCode[1] {
+					for kkk,vvv:=range v.Children(){
+						areaList[k+kk+kkk] = vvv.value
+					}
+				}
+			}
+		}
+	}
+	return areaList
+}
