@@ -1,14 +1,13 @@
-package gbt2260
+package gbt2260_test
 
-import "testing"
+import (
+	"github.com/ppmoon/gbt2260"
+	"testing"
+)
 
-//func TestSearchTrieTree(t *testing.T) {
-//	local := SearchTrieTree("110000")
-//	fmt.Println(local)
-//}
 func TestBGT2260_SearchGBT2260(t *testing.T) {
-	gbt2260 := NewGBT2260()
-	lCode := gbt2260.SearchGBT2260("130104")
+	gbt := gbt2260.NewGBT2260()
+	lCode := gbt.SearchGBT2260("130104")
 	compareCode := []string{"河北省", "石家庄市", "桥西区"}
 	for i := range lCode {
 		if lCode[i] != compareCode[i] {
@@ -18,7 +17,32 @@ func TestBGT2260_SearchGBT2260(t *testing.T) {
 	}
 }
 
-//下面这个测试用来生成地域配置文件用的
-func TestCreateGBT2260Table(t *testing.T) {
-	CreateGBT2260Table()
+func TestBGT2260_GetAllProvince(t *testing.T) {
+	gbt := gbt2260.NewGBT2260()
+	allProvince := gbt.GetAllProvince()
+	t.Log(allProvince)
+}
+
+func TestBGT2260_GetCityByProvince(t *testing.T) {
+	gbt := gbt2260.NewGBT2260()
+	allCity := gbt.GetCityByProvince("130000")
+	t.Log(allCity)
+}
+
+func TestBGT2260_GetAreaByCity(t *testing.T) {
+	gbt := gbt2260.NewGBT2260()
+	area := gbt.GetAreaByCity("130100")
+	areaName, _ := area["130102"]
+	if areaName != "长安区" {
+		t.Error("get area by city error")
+	}
+}
+
+func TestNewGBT2260(t *testing.T) {
+	a := gbt2260.NewGBT2260()
+	b := gbt2260.NewGBT2260()
+	if a != b {
+		t.Error("singleton error")
+		return
+	}
 }

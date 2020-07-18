@@ -1,17 +1,20 @@
-package gbt2260
+package main
 
 import (
 	"encoding/csv"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 )
 
+func main() {
+	CreateGBT2260Table()
+}
 func CreateGBT2260Table() {
-	file, err := os.Open("./data/GBT2260-201911.csv")
+	file, err := os.Open("./data/GBT2260-202003.csv")
 	if err != nil {
-		fmt.Println("Error:", err)
+		fmt.Println("Gen File Error:", err)
+		return
 	}
 	defer file.Close()
 	reader := csv.NewReader(file)
@@ -28,5 +31,15 @@ func CreateGBT2260Table() {
 		line = line + "{\"" + code + "\",\"" + name + "\"},"
 	}
 	content := "package gbt2260;func GetGbt2260Table() [][]string {gbt2260Table := [][]string{" + line + "};return gbt2260Table;}"
-	ioutil.WriteFile("gbt2260Table.go", []byte(content), 0666)
+	gbtFile, err := os.Create("gbt2260Table.go")
+	if err != nil {
+		fmt.Println("Gen File Error:", err)
+		return
+	}
+	defer gbtFile.Close()
+	_, err = gbtFile.Write([]byte(content))
+	if err != nil {
+		fmt.Println("write file error", err)
+		return
+	}
 }

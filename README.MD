@@ -15,9 +15,9 @@ go get -u github.com/ppmoon/gbt2260
 如果是直辖市比如北京 110000 返回就是[北京市]
 
 ````golang
-//引入包
+// 引入包
 import "github.com/ppmoon/gbt2260"
-//打印查看
+// 打印查看
 region := gbt2260.NewGBT2260()
 localCode := region.SearchGBT2260("130104")
 fmt.Println(localCode)
@@ -25,9 +25,21 @@ fmt.Println(localCode)
 ````bash
 [河北省 石家庄市 桥西区]
 ````
+````golang
+// 获取所有省份
+allProvince := region.GetAllProvince()
+fmt.Println(allProvince)
+// 通过省份获得省份下的城市
+allCity := gbt.GetCityByProvince("130000")
+fmt.Println(allCity)
+// 通过城市获得城市的区县
+allArea := gbt.GetAreaByCity("130100")
+fmt.Println(allArea)
+````
+
 ## 数据来源
 
-目前数据使用2018年8月的最新数据
+目前数据使用2020年3月的最新数据
 
 [中华人民共和国民政部](http://www.mca.gov.cn/article/sj/xzqh/2018/)
 
