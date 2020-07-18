@@ -12,7 +12,7 @@ type Trie struct {
 }
 
 //创建一颗新树
-func New() *Trie {
+func NewTrie() *Trie {
 	return &Trie{
 		root: &Node{
 			children: make(map[string]*Node),
@@ -49,8 +49,6 @@ func (n *Node) NewChild(key string, value string) *Node {
 	n.children[key] = node
 	return node
 }
-
-//根据树遍历
 
 // 返回一个子叶
 func (n Node) Children() map[string]*Node {
