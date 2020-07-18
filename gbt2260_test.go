@@ -37,3 +37,12 @@ func TestBGT2260_GetAreaByCity(t *testing.T) {
 		t.Error("get area by city error")
 	}
 }
+
+func TestNewGBT2260(t *testing.T) {
+	a := gbt2260.NewGBT2260()
+	b := gbt2260.NewGBT2260()
+	if a != b {
+		t.Error("singleton error")
+		return
+	}
+}

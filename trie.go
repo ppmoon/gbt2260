@@ -50,8 +50,6 @@ func (n *Node) NewChild(key string, value string) *Node {
 	return node
 }
 
-//根据树遍历
-
 // 返回一个子叶
 func (n Node) Children() map[string]*Node {
 	return n.children
