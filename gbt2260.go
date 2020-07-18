@@ -2,29 +2,36 @@ package gbt2260
 
 import (
 	"fmt"
+	"sync"
 )
 
 type BGT2260 struct {
 	trie *Trie
 }
 
+var gbt2260 *BGT2260
+var once sync.Once
+
 func NewGBT2260() *BGT2260 {
-	gbt2260Table := GetGbt2260Table()
-	t := NewTrie()
-	for _, cell := range gbt2260Table {
-		//检查传递参数
-		if cell[0] == "" || len(cell[0]) == 0 {
-			return nil
+	once.Do(func() {
+		gbt2260Table := GetGbt2260Table()
+		t := NewTrie()
+		for _, cell := range gbt2260Table {
+			//检查传递参数
+			if cell[0] == "" || len(cell[0]) == 0 {
+				return
+			}
+			//过滤下数据构造插入lCode
+			var lCode = stringParse(cell[0])
+			//创建trie树
+			trieRoot := t
+			trieRoot.Add(lCode, cell[1])
 		}
-		//过滤下数据构造插入lCode
-		var lCode = stringParse(cell[0])
-		//创建trie树
-		trieRoot := t
-		trieRoot.Add(lCode, cell[1])
-	}
-	return &BGT2260{
-		trie: t,
-	}
+		gbt2260 = &BGT2260{
+			trie: t,
+		}
+	})
+	return gbt2260
 }
 
 //将传入的字符串解析成字符串数组
