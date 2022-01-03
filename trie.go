@@ -6,7 +6,7 @@ type Node struct {
 	children map[string]*Node
 }
 
-//跟树
+//根树
 type Trie struct {
 	root *Node
 }
