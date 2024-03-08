@@ -39,7 +39,7 @@ fmt.Println(allArea)
 
 ## 数据来源
 
-目前数据使用2021年5月的最新数据
+目前数据使用2023年4月的最新数据
 
 [中华人民共和国民政部](http://www.mca.gov.cn/article/sj/xzqh/2018/)
 
