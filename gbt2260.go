@@ -2,6 +2,7 @@ package gbt2260
 
 import (
 	"fmt"
+	"sort"
 	"sync"
 )
 
@@ -15,17 +16,30 @@ var once sync.Once
 func NewGBT2260() *BGT2260 {
 	once.Do(func() {
 		gbt2260Table := GetGbt2260Table()
-		t := NewTrie()
+		gbt2260TableMap := make(map[string]string)
 		for _, cell := range gbt2260Table {
 			//检查传递参数
 			if cell[0] == "" || len(cell[0]) == 0 {
 				return
 			}
+			gbt2260TableMap[cell[0]] = cell[1]
+		}
+
+		keys := make([]string, 0)
+		for k, _ := range gbt2260TableMap {
+			keys = append(keys, k)
+		}
+
+		// 对区划代码进行排序
+		sort.Strings(keys)
+
+		t := NewTrie()
+		for _, key := range keys {
 			//过滤下数据构造插入lCode
-			var lCode = stringParse(cell[0])
+			var lCode = stringParse(key)
 			//创建trie树
 			trieRoot := t
-			trieRoot.Add(lCode, cell[1])
+			trieRoot.Add(lCode, gbt2260TableMap[key])
 		}
 		gbt2260 = &BGT2260{
 			trie: t,
@@ -34,7 +48,7 @@ func NewGBT2260() *BGT2260 {
 	return gbt2260
 }
 
-//将传入的字符串解析成字符串数组
+// 将传入的字符串解析成字符串数组
 func stringParse(str string) []string {
 	var lCode []string
 	for i := 0; i < len(str)/2; i++ {
@@ -45,7 +59,7 @@ func stringParse(str string) []string {
 	return lCode
 }
 
-//从树里面读取数据
+// 从树里面读取数据
 func (b *BGT2260) SearchGBT2260(code string) []string {
 	var lCode = stringParse(code)
 	var newCode []string
@@ -84,6 +98,7 @@ func (b *BGT2260) GetCityByProvince(code string) map[string]string {
 			}
 		}
 	}
+	fmt.Println(cityList)
 	return cityList
 }
 

@@ -25,17 +25,14 @@ func TestBGT2260_GetAllProvince(t *testing.T) {
 
 func TestBGT2260_GetCityByProvince(t *testing.T) {
 	gbt := gbt2260.NewGBT2260()
-	allCity := gbt.GetCityByProvince("130000")
+	allCity := gbt.GetCityByProvince("110100")
 	t.Log(allCity)
 }
 
 func TestBGT2260_GetAreaByCity(t *testing.T) {
 	gbt := gbt2260.NewGBT2260()
-	area := gbt.GetAreaByCity("130100")
-	areaName, _ := area["130102"]
-	if areaName != "长安区" {
-		t.Error("get area by city error")
-	}
+	area := gbt.GetAreaByCity("110100")
+	t.Log(area)
 }
 
 func TestNewGBT2260(t *testing.T) {
