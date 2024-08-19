@@ -11,7 +11,7 @@ func main() {
 	CreateGBT2260Table()
 }
 func CreateGBT2260Table() {
-	file, err := os.Open("./data/GBT2260-202105.csv")
+	file, err := os.Open("./data/GBT2260-202201.csv")
 	if err != nil {
 		fmt.Println("Gen File Error:", err)
 		return

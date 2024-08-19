@@ -19,7 +19,7 @@ func NewGBT2260() *BGT2260 {
 		for _, cell := range gbt2260Table {
 			//检查传递参数
 			if cell[0] == "" || len(cell[0]) == 0 {
-				return
+				continue
 			}
 			//过滤下数据构造插入lCode
 			var lCode = stringParse(cell[0])
@@ -34,7 +34,7 @@ func NewGBT2260() *BGT2260 {
 	return gbt2260
 }
 
-//将传入的字符串解析成字符串数组
+// 将传入的字符串解析成字符串数组
 func stringParse(str string) []string {
 	var lCode []string
 	for i := 0; i < len(str)/2; i++ {
@@ -45,7 +45,7 @@ func stringParse(str string) []string {
 	return lCode
 }
 
-//从树里面读取数据
+// 从树里面读取数据
 func (b *BGT2260) SearchGBT2260(code string) []string {
 	var lCode = stringParse(code)
 	var newCode []string
