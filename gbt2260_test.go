@@ -1,8 +1,9 @@
 package gbt2260_test
 
 import (
-	"github.com/ppmoon/gbt2260"
 	"testing"
+
+	"github.com/ppmoon/gbt2260"
 )
 
 func TestBGT2260_SearchGBT2260(t *testing.T) {
@@ -20,19 +21,25 @@ func TestBGT2260_SearchGBT2260(t *testing.T) {
 func TestBGT2260_GetAllProvince(t *testing.T) {
 	gbt := gbt2260.NewGBT2260()
 	allProvince := gbt.GetAllProvince()
+	if len(allProvince) != 34 {
+		t.Errorf("省份数量不正确")
+	}
 	t.Log(allProvince)
 }
 
 func TestBGT2260_GetCityByProvince(t *testing.T) {
 	gbt := gbt2260.NewGBT2260()
 	allCity := gbt.GetCityByProvince("130000")
+	if len(allCity) != 11 {
+		t.Error("河北省地级市数量不对")
+	}
 	t.Log(allCity)
 }
 
 func TestBGT2260_GetAreaByCity(t *testing.T) {
 	gbt := gbt2260.NewGBT2260()
 	area := gbt.GetAreaByCity("130100")
-	areaName, _ := area["130102"]
+	areaName := area["130102"]
 	if areaName != "长安区" {
 		t.Error("get area by city error")
 	}
